@@ -4,6 +4,6 @@ namespace Rendering.Core
 {
     public interface IPhotonLightSource
     {
-        Tuple<Ray, Light> Emit();
+        (Ray, Light) Emit(IRandomSequence rnd);
     }
 }

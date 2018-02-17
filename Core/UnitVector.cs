@@ -28,6 +28,24 @@ namespace Rendering.Core
             return new NonUnitVector(v1.X * d2, v1.Y * d2, v1.Z * d2);
         }
 
+        public static NonUnitVector operator -(UnitVector v1, NonUnitVector v2)
+        {
+            return new NonUnitVector(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z);
+        }
+
+        public static UnitVector UnsafeCreateUnitVector(double x, double y, double z)
+        {
+#if DEBUG
+            var ms = x * x + y * y + z * z;
+
+            if (ms < 0.99 || ms > 1.01)
+            {
+                throw new InvalidOperationException($"UnsafeCreateUnitVector({x},{y}, {z}) has magnitude-squared of {ms}.");
+            }
+#endif
+
+            return new UnitVector(x, y, z);
+        }
 
         public static UnitVector UnsafeCreateUnitVector(NonUnitVector v)
         {

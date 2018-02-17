@@ -30,4 +30,12 @@ namespace Rendering.Volumes
         private readonly NonUnitVector _nvt;
         private readonly Volume _volume;
     }
+
+    public static class TranslatedExtension
+    {
+        public static Volume Translate(this Volume volume, Point p)
+        {
+            return new Translated(Point.Origin.To(p), volume);
+        }
+    }
 }
